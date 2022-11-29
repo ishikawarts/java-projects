@@ -215,7 +215,7 @@ public class Board implements Cloneable {
 					IntStream.rangeClosed(1, 7)
 							.mapToObj(i -> new Position(x + offset.x() * i, y + offset.y() * i))
 							.filter(position -> !isOutsideBoard(position))
-							.takeWhile(position -> this.board[position.x()][position.y()] == Stone.opposite(mine))
+							.takeWhile(position -> isOpponentsStone(position, mine))
 							.forEach(position -> this.board[position.x()][position.y()] = mine);
 				});
 	}
