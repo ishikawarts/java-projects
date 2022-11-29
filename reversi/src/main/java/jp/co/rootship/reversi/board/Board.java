@@ -1,6 +1,5 @@
 package jp.co.rootship.reversi.board;
 
-import java.util.List;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -213,20 +212,11 @@ public class Board implements Cloneable {
 	private void reverse(int x, int y, int mine) {
 		this.getDirectionsThatCanReversed(x, y, mine)
 				.forEach(offset -> {
-					List<Position> positions = IntStream.rangeClosed(1, 7)
+					IntStream.rangeClosed(1, 7)
 							.mapToObj(i -> new Position(x + offset.x() * i, y + offset.y() * i))
 							.filter(position -> !isOutsideBoard(position))
-							.toList();
-
-					int minePositionIndex = positions.stream()
-							.map(position -> this.board[position.x()][position.y()])
-							.toList()
-							.indexOf(mine);
-
-					positions.stream()
-							.limit(minePositionIndex)
+							.takeWhile(position -> this.board[position.x()][position.y()] == Stone.opposite(mine))
 							.forEach(position -> this.board[position.x()][position.y()] = mine);
-
 				});
 	}
 
