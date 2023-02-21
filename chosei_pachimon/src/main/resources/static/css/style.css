@@ -1,0 +1,31 @@
+.schedule-table {
+	width: auto !important;
+}
+
+.schedule-table th:not(:first-child), .schedule-table td:not(:first-child)
+	{
+	min-width: 55px;
+	max-width: 120px;
+	width: 100px;
+	word-break: break-all;
+}
+
+.btn-round {
+	border-radius: 99em !important;
+	width: 130px !important;
+	height: 130px !important;
+}
+
+.btn-square {
+	border-radius: 1em !important;
+	width: 40px !important;
+	height: 40px !important;
+}
+
+.ui-widget-content .ui-icon {
+	background-image: url("/images/ui-icons_222222_256x240.png") !important;
+}
+
+.ui-widget-header .ui-icon {
+	background-image: url("/images/ui-icons_222222_256x240.png") !important;
+}

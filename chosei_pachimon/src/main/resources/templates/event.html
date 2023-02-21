@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+<link th:href="@{/css/style.css}" rel="stylesheet">
+<script th:src="@{/scripts/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/scripts/jquery-3.6.3.min.js}"></script>
+<title th:text="${event.title}">イベント名</title>
+<script type="text/javascript">
+	$(function() {
+		$(".schedule-table a").on("click", function() {
+			// jqueryだとめんどくさいvueだと楽そう
+		});
+
+		$("#inputArea").hide(); // 最初は非表示
+		$("#inputButton").on("click", function() {
+			$("#inputArea").show();
+			$(this).hide();
+		});
+	});
+</script>
+</head>
+<body>
+	<div class="container-md">
+		<div class="mb-5">
+			<div class="mb-1 d-flex border-1 border-bottom">
+				<h4 class="p-1 me-auto text-secondary" th:text="${event.title}">イベント名</h4>
+				<button class="mb-1 btn btn-secondary" type="button">イベント編集</button>
+			</div>
+			<div class="mb-2">
+				<span class="px-1 pb-1 me-1 bg-secondary text-white fs-6">回答者数</span>
+				<span class="me-2">1人</span>
+			</div>
+			<div>
+				<label class="mb-2 ps-1 border-4 border-start border-secondary" for="name">イベントの詳細説明</label>
+				<p　th:text="${event.description}">ここにイベントの詳細説明を表示する</p>
+			</div>
+		</div>
+	</div>
+	<div class="py-2" style="background-color: #f9f9f9">
+		<div class="container-md">
+			<h5 class="ps-1 border-4 border-start border-secondary text-secondary">日にち候補</h5>
+			<p>※各自の出欠状況を変更するには名前のリンクをクリックしてください。</p>
+			<div class="text-center mb-3">
+				<table class="d-inline table table-bordered schedule-table">
+					<thead>
+						<tr>
+							<th scope="col">日程</th>
+							<th scope="col">○</th>
+							<th scope="col">×</th>
+							<th scope="col">△</th>
+							<th scope="col">
+								<a href="#">田中</a>
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th scope="row">2/22(水) 19:00〜</th>
+							<td>0人</td>
+							<td>0人</td>
+							<td>0人</td>
+							<td>○</td>
+						</tr>
+						<tr>
+							<th scope="row">2/23(木) 19:00〜</th>
+							<td>0人</td>
+							<td>0人</td>
+							<td>0人</td>
+							<td>△</td>
+						</tr>
+						<tr>
+							<th scope="row">2/24(金) 19:00〜</th>
+							<td>0人</td>
+							<td>0人</td>
+							<td>0人</td>
+							<td>×</td>
+						</tr>
+						<tr>
+							<th scope="row">コメント</th>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td>あいうえお</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="text-center">
+				<button class="btn btn-success btn-round" type="button" id="inputButton">出欠を入力する</button>
+			</div>
+		</div>
+	</div>
+	<div class="py-2 container-md" id="inputArea">
+		<form action="#" th:action="@{/event(h=${hash})}" method="post">
+			<div class="mx-auto w-50">
+				<div class="mb-2">
+					<label class="mb-2 ps-1 border-4 border-start border-secondary" for="name">名前</label>
+					<input type="text" id="name" name="name" class="form-control" />
+				</div>
+				<div class="mb-2">
+					<label class="mb-2 ps-1 border-4 border-start border-secondary" for="name">日にち候補</label>
+					<div class="px-3 mb-1 d-flex flex-row align-items-center">
+						<span class="w-75 me-auto fs-5">2/22(水) 19:00〜</span>
+						<input class="btn-check" type="radio" id="schadule1_o" name="schadule1" value="1" />
+						<label class="me-1 btn btn-outline-success btn-square p-0 position-relative" for="schadule1_o">
+							<span class="position-absolute top-50 start-50 translate-middle">○</span>
+						</label>
+						<input class="btn-check" type="radio" id="schadule1_v" name="schadule1" value="2" />
+						<label class="me-1 btn btn-outline-success btn-square p-0 position-relative" for="schadule1_v">
+							<span class="position-absolute top-50 start-50 translate-middle">△</span>
+						</label>
+						<input class="btn-check" type="radio" id="schadule1_x" name="schadule1" value="3" />
+						<label class="me-1 btn btn-outline-success btn-square p-0 position-relative" for="schadule1_x">
+							<span class="position-absolute top-50 start-50 translate-middle">×</span>
+						</label>
+					</div>
+					<div class="px-3 mb-1 d-flex flex-row align-items-center">
+						<span class="w-75 me-auto fs-5">2/23(木) 19:00〜</span>
+						<input class="btn-check" type="radio" id="schadule2_o" name="schadule2" value="1" />
+						<label class="me-1 btn btn-outline-success btn-square p-0 position-relative" for="schadule2_o">
+							<span class="position-absolute top-50 start-50 translate-middle">○</span>
+						</label>
+						<input class="btn-check" type="radio" id="schadule2_v" name="schadule2" value="2" />
+						<label class="me-1 btn btn-outline-success btn-square p-0 position-relative" for="schadule2_v">
+							<span class="position-absolute top-50 start-50 translate-middle">△</span>
+						</label>
+						<input class="btn-check" type="radio" id="schadule2_x" name="schadule2" value="3" />
+						<label class="me-1 btn btn-outline-success btn-square p-0 position-relative" for="schadule2_x">
+							<span class="position-absolute top-50 start-50 translate-middle">×</span>
+						</label>
+					</div>
+					<div class="px-3 mb-1 d-flex flex-row align-items-center">
+						<span class="w-75 me-auto fs-5">2/24(金) 19:00〜</span>
+						<input class="btn-check" type="radio" id="schadule3_o" name="schadule3" value="1" />
+						<label class="me-1 btn btn-outline-success btn-square p-0 position-relative" for="schadule3_o">
+							<span class="position-absolute top-50 start-50 translate-middle">○</span>
+						</label>
+						<input class="btn-check" type="radio" id="schadule3_v" name="schadule3" value="2" />
+						<label class="me-1 btn btn-outline-success btn-square p-0 position-relative" for="schadule3_v">
+							<span class="position-absolute top-50 start-50 translate-middle">△</span>
+						</label>
+						<input class="btn-check" type="radio" id="schadule3_x" name="schadule3" value="3" />
+						<label class="me-1 btn btn-outline-success btn-square p-0 position-relative" for="schadule3_x">
+							<span class="position-absolute top-50 start-50 translate-middle">×</span>
+						</label>
+					</div>
+				</div>
+				<div class="mb-2">
+					<label class="mb-2 ps-1 border-4 border-start border-secondary" for="comment">コメント</label>
+					<input class="form-control" type="text" id="comment" name="comment" />
+				</div>
+			</div>
+			<div class="text-center">
+				<button class="btn btn-success btn-round" type="submit" id="submitButton">入力する</button>
+			</div>
+		</form>
+	</div>
+</body>
+</html>

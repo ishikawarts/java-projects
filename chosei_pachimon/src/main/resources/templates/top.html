@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+<link th:href="@{/css/style.css}" rel="stylesheet">
+<link th:href="@{/css/jquery-ui.min.css}" rel="stylesheet">
+<script th:src="@{/scripts/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/scripts/jquery-3.6.3.min.js}"></script>
+<script th:src="@{/scripts/jquery-ui.min.js}"></script>
+<script th:src="@{/scripts/jquery.ui.datepicker-ja.min.js}"></script>
+<title>調整さんのパクリ</title>
+<script type="text/javascript">
+	$(function() {
+		$("#datepicker").datepicker({
+			dateFormat : "mm/dd (D)",
+			onSelect : function(day) {
+				let scheduleTextarea = $("#schedule_text");
+				let tmp = scheduleTextarea.val();
+				let appendText = day + " 19:00 ~";
+				scheduleTextarea.val(tmp + appendText + "\n");
+			}
+		});
+	});
+</script>
+</head>
+<body class="overflow-auto" style="background-color: #eaf4e5">
+	<div class="container-md">
+		<h3 class="p-1 mb-3 border-3 border-bottom">調整さんのパクリ</h3>
+		<form action="#" th:action="@{/created}" method="post">
+			<div class="row mb-3">
+				<div class="col-4">
+					<div id="event_title" class="mb-4">
+						<h5>
+							<span class="px-1 pb-1 bg-secondary text-white">STEP1</span>
+							イベント名
+						</h5>
+						<p>※今期もお疲れ様でした飲み会、打ち合わせなど</p>
+						<div>
+							<input type="text" class="form-control" />
+						</div>
+					</div>
+					<div>
+						<h5 class="ps-1 border-4 border-start border-secondary">メモ</h5>
+						<p>※飲み会の日程調整しましょう！出欠〆切は◯日</p>
+						<div>
+							<textarea class="form-control" rows="9"></textarea>
+						</div>
+					</div>
+				</div>
+				<div class="col-8">
+					<div id="event_schedule" class="mb-2">
+						<h5>
+							<span class="px-1 pb-1 bg-secondary text-white">STEP2</span>
+							候補日程
+						</h5>
+						<p>
+							※候補日程／日時を入力してください
+							<br />
+							候補の区切りは改行で判断されます。
+						</p>
+						<p>
+							例:
+							<br />
+							8/7(月) 20:00～
+							<br />
+							8/8(火) 20:00～
+							<br />
+							8/9(水) 21:00～
+						</p>
+						<div class="d-flex">
+							<div class="me-3 flex-fill">
+								<textarea id="schedule_text" class="form-control" rows="9"></textarea>
+							</div>
+							<div class="flex-fill">
+								<div id="datepicker"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div>
+				<button type="submit" class="btn btn-success w-100">出欠表を作る</button>
+			</div>
+		</form>
+	</div>
+</body>
+</html>
