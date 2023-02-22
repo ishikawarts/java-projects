@@ -19,6 +19,6 @@ public interface IResult {
 	}
 
 	default boolean hasError() {
-		return ResultType.WARNING.equals(resultType());
+		return ResultType.ERROR.equals(resultType());
 	}
 }
