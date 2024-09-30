@@ -48,7 +48,6 @@ public class ScheduleRegisterController {
 
 	@PostMapping("/event")
 	public String register(Model model, @RequestParam(name = "h") String hash) {
-		model.addAttribute("hash", hash);
-		return "event";
+		return "redirect:/event?h=" + hash;
 	}
 }
